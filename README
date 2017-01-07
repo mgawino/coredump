@@ -1,0 +1,20 @@
+Autor: Mateusz Gawino 320637
+
+Potrzebne paczki:
+
+apt-get install cmake build-essential
+
+Instrukcja kompilacji (w rozpakowanym katalogu):
+
+cmake . && make
+
+Opis rozwiązania:
+
+Sekcje programu zostały zlinkowane pod niskie adresy, aby nie kolidowały z programem core.
+Program wykonuje następujące czynności:
+    * podmienia stos programu na własny i umieszcza go pod adresem STACK_ADDRESS
+    * wczytuje nagłówek core i sprawdza jego poprawność
+    * parsuje nagłówki programów oraz nagłówki notatek i wczytuje wszystkie dane do stałych struktur
+    * mapuje do własnej pamięci pliki z NT_FILE + zmapowane obszary z pliku core (PT_LOAD)
+    * ustawia adres segmentu TLS
+    * ustawia rejestry, korzystając z szablonu zmapowanego do pamięci
